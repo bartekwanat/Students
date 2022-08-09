@@ -26,6 +26,13 @@ namespace StudentsAPI.Database.EntityConfiguration
                 .Property(x => x.UniversityId)
                 .IsRequired()
                 .HasColumnType("UNIQUEIDENTIFIER");
+            
+            builder
+                .HasOne(x => x.University)
+                .WithMany(x => x.Students)
+                .HasForeignKey(x => x.UniversityId);
+
+            
         }
     }
 }
