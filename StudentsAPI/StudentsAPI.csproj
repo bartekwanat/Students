@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Student\Query\" />
+    <Folder Include="Services\University\Queries\" />
   </ItemGroup>
 
 </Project>
