@@ -16,7 +16,6 @@ namespace StudentsAPI.Database.EntityConfiguration
             builder
                 .HasMany(x => x.Students)
                 .WithOne(x => x.University);
-
         }
     }
 }

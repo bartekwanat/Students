@@ -31,8 +31,6 @@ namespace StudentsAPI.Database.EntityConfiguration
                 .HasOne(x => x.University)
                 .WithMany(x => x.Students)
                 .HasForeignKey(x => x.UniversityId);
-
-            
         }
     }
 }
