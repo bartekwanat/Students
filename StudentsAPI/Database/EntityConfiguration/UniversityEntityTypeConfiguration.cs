@@ -13,9 +13,6 @@ namespace StudentsAPI.Database.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder
-                .HasMany(x => x.Students)
-                .WithOne(x => x.University);
         }
     }
 }

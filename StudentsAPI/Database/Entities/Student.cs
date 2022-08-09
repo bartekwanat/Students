@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace StudentsAPI.Database.Entities
 {
@@ -6,10 +7,11 @@ namespace StudentsAPI.Database.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateOnly DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         [IgnoreDataMember]
-        public Guid UniversityId { get; set; }
-        public virtual University University { get; set; }
+        public List<UniversityStudents> UniversityStudents { get; set; }
+        public ICollection<University> Universities { get; set; }
+
     }
 }

@@ -7,6 +7,7 @@ namespace StudentsAPI.Database.Entities
         public string UniversityName { get; set; }
 
         [IgnoreDataMember]
-        public List<Student> Students { get; set; }
+        public List<UniversityStudents> UniversityStudents { get; set; }
+        public ICollection<Student> Students { get; set; }
     }
 }

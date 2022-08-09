@@ -8,29 +8,35 @@ namespace StudentsAPI.Database.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Student> builder)
         {
+            builder.Property(x => x.Id)
+                .ValueGeneratedOnAdd();
+
             builder
                 .Property(x => x.FirstName)
-                .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(50)
+                .IsRequired();
 
             builder.Property(x => x.LastName)
-                .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(50)
+                .IsRequired();
 
             builder
                 .Property(x => x.DateOfBirth)
-                .IsRequired()
-                .HasColumnType("date");
+                .HasColumnType("Date")
+                .IsRequired();
 
             builder
-                .Property(x => x.UniversityId)
-                .IsRequired()
-                .HasColumnType("UNIQUEIDENTIFIER");
-            
-            builder
-                .HasOne(x => x.University)
+                .HasMany(x => x.Universities)
                 .WithMany(x => x.Students)
-                .HasForeignKey(x => x.UniversityId);
+                .UsingEntity<UniversityStudents>(
+                    x => x.HasOne(y => y.University)
+                        .WithMany(y => y.UniversityStudents)
+                        .HasForeignKey(y => y.UniversityId),
+                    x => x.HasOne(y => y.Student)
+                        .WithMany(y => y.UniversityStudents)
+                        .HasForeignKey(y => y.StudentId),
+                    x => x.HasKey(y => new {y.StudentId, y.UniversityId}));
+
         }
     }
 }
