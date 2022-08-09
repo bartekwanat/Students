@@ -37,7 +37,8 @@ namespace StudentsAPI.Services.Student.Command
 
                 var universitiesToAdd = _context.Universities
                     .AsTracking()
-                    .Where(x => request.UniversityIds.Contains(x.Id)).ToList();
+                    .Where(x => request.UniversityIds.Contains(x.Id))
+                    .ToList();
 
                 student.UniversityStudents = universitiesToAdd
                     .Select(universityId => new UniversityStudents()
