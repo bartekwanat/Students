@@ -1,9 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using StudentsAPI.Database;
+using StudentsAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddControllers();
+builder.Services.AddServiceLayer();
+builder.Services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 builder.Services.AddDbContext<ApplicationDbContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("AppDbConnection")));
 builder.Services.AddControllers();
