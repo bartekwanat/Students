@@ -2,9 +2,8 @@
 
 namespace StudentsAPI.Database.Entities
 {
-    public class University
+    public class University : BaseEntity
     {
-        public Guid Id { get; set; }
         public string UniversityName { get; set; }
 
         [IgnoreDataMember]
