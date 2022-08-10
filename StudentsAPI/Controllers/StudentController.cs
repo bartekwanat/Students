@@ -53,5 +53,16 @@ namespace StudentsAPI.Controllers
 
             return Ok(await Mediator.Send(command));
         }
+
+        [HttpPut("{id}/AddUniversity")]
+        public async Task<IActionResult> AddUniversity(Guid id, UpdateStudentCommand command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest();
+            }
+
+            return Ok(await Mediator.Send(command));
+        }
     }
 }
