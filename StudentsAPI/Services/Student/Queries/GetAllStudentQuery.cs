@@ -20,9 +20,10 @@ namespace StudentsAPI.Services.Student.Query
             public async Task<IEnumerable<Database.Entities.Student>> Handle(GetAllStudentQuery request,
                 CancellationToken cancellationToken)
             {
+
                 var studentList = await _context.Students
                     .Include(x => x.Universities)
-                    .Skip(request.Pagination.ItemsPerPage * request.Pagination.page)
+                    .Skip(request.Pagination.ItemsPerPage * request.Pagination.Page)
                     .Take(request.Pagination.ItemsPerPage)
                     .ToListAsync(cancellationToken: cancellationToken);
 

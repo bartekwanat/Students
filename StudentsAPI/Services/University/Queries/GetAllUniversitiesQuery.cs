@@ -22,7 +22,7 @@ namespace StudentsAPI.Services.University.Queries
                 CancellationToken cancellationToken)
             {
                 var universitiesList = await _context.Universities
-                    .Skip(request.Pagination.ItemsPerPage * request.Pagination.page)
+                    .Skip(request.Pagination.ItemsPerPage * request.Pagination.Page)
                     .Take(request.Pagination.ItemsPerPage)
                     .ToListAsync(cancellationToken: cancellationToken);
 
