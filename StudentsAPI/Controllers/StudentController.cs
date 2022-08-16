@@ -16,9 +16,9 @@ namespace StudentsAPI.Controllers
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] PaginationModel pagination)
+        public async Task<IActionResult> GetAll([FromQuery] PaginationModel pagination, [FromQuery] SearchModel search)
         {
-            var result = await Mediator.Send(new GetAllStudentQuery(){Pagination = pagination});
+            var result = await Mediator.Send(new GetAllStudentQuery {Pagination = pagination, SearchPhrase = search});
 
             return Ok(result);
         }
@@ -26,8 +26,8 @@ namespace StudentsAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await Mediator.Send(new GetStudentQuery() {Id = id});
-            
+            var result = await Mediator.Send(new GetStudentQuery() { Id = id });
+
             return Ok(result);
         }
 
@@ -40,7 +40,7 @@ namespace StudentsAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            return Ok(await Mediator.Send(new DeleteStudentCommand {Id = id}));
+            return Ok(await Mediator.Send(new DeleteStudentCommand { Id = id }));
         }
 
         [HttpPut("{id}")]

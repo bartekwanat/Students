@@ -20,7 +20,7 @@
             }
 
             [System.Text.Json.Serialization.JsonIgnore]
-            public int ItemsPerPage => PageSize > MaxItemsPerPage ? MaxItemsPerPage : PageSize;
+            public int ItemsPerPage => (PageSize > MaxItemsPerPage ? MaxItemsPerPage : PageSize);
         }
     }
 
