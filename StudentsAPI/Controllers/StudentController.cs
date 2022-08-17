@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using StudentsAPI.Database.Entities;
 using StudentsAPI.Models;
 using StudentsAPI.Services.Student.Command;
+using StudentsAPI.Services.Student.Commands;
 using StudentsAPI.Services.Student.Queries;
 using StudentsAPI.Services.Student.Query;
 
@@ -54,15 +55,11 @@ namespace StudentsAPI.Controllers
             return Ok(await Mediator.Send(command));
         }
 
-        [HttpPut("{id}/AddUniversity")]
-        public async Task<IActionResult> AddUniversity(Guid id, UpdateStudentCommand command)
+        [HttpPut("/AddUniversity")]
+        public async Task<IActionResult> AddUniversity([FromQuery] Guid studentId, [FromQuery] List<Guid> universityIds)
         {
-            if (id != command.Id)
-            {
-                return BadRequest();
-            }
-
-            return Ok(await Mediator.Send(command));
+            
+            return Ok(await Mediator.Send(new AddUniversityToStudentCommand {Id = studentId, UniversityIds = universityIds}));
         }
     }
 }

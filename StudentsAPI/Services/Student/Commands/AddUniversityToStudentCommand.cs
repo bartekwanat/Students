@@ -7,13 +7,13 @@ using StudentsAPI.Services.Student.Command;
 
 namespace StudentsAPI.Services.Student.Commands
 {
-    public class AddUniversityToStudentCommand
+    public class AddUniversityToStudentCommand : IRequest<Guid>
     {
         public Guid Id { get; set; }
 
         public List<Guid> UniversityIds { get; set; }
 
-        public class AddUniversityToStudentCommandHandler : IRequest<AddUniversityToStudentCommand>
+        public class AddUniversityToStudentCommandHandler : IRequestHandler<AddUniversityToStudentCommand, Guid>
         {
             private readonly IApplicationDbContext _context;
 
