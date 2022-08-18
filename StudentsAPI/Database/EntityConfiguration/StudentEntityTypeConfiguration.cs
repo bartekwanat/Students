@@ -27,16 +27,7 @@ namespace StudentsAPI.Database.EntityConfiguration
 
             builder
                 .HasMany(x => x.Universities)
-                .WithMany(x => x.Students)
-                .UsingEntity<UniversityStudents>(
-                    x => x.HasOne(y => y.University)
-                        .WithMany(y => y.UniversityStudents)
-                        .HasForeignKey(y => y.UniversityId),
-                    x => x.HasOne(y => y.Student)
-                        .WithMany(y => y.UniversityStudents)
-                        .HasForeignKey(y => y.StudentId),
-                    x => x.HasKey(y => new {y.StudentId, y.UniversityId}));
-
+                .WithMany(x => x.Students);
         }
     }
 }

@@ -10,8 +10,7 @@ namespace StudentsAPI.Database.Entities
         public DateTime DateOfBirth { get; set; }
 
         [IgnoreDataMember]
-        public List<UniversityStudents> UniversityStudents { get; set; }
-        public ICollection<University> Universities { get; set; }
+        public IEnumerable<University> Universities { get; set; }
 
     }
 }

@@ -13,7 +13,7 @@ namespace StudentsAPI.Services.Student.Command
         public string LastName { get; set; }
         [DataType(DataType.Date)]
         public DateTime DateOfBirthday { get; set; }
-        public List<Guid> UniversityIds { get; set; }
+        public List<string> UniversityNames{ get; set; }
 
 
 
@@ -33,16 +33,16 @@ namespace StudentsAPI.Services.Student.Command
                 student.FirstName = request.FirstName;
                 student.LastName = request.LastName;
                 student.DateOfBirth = request.DateOfBirthday;
-                student.UniversityStudents = new List<UniversityStudents>();
+                student.Universities = new List<Database.Entities.University>();
 
                 var universitiesToAdd = _context.Universities
                     .AsTracking()
-                    .Where(x => request.UniversityIds.Contains(x.Id))
+                    .Where(x => request.UniversityNames.Contains(x.UniversityName))
                     .ToList();
 
-                student.UniversityStudents = universitiesToAdd
-                    .Select(universityId => new UniversityStudents()
-                        {UniversityId = universityId.Id, Student = student})
+                student.Universities = universitiesToAdd
+                    .Select(universityName => new Database.Entities.University()
+                        {UniversityName = universityName.UniversityName})
                     .ToList();
 
                 var result = _context.Students.Add(student).Entity;
