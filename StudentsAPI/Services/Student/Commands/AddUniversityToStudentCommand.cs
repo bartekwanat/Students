@@ -34,9 +34,9 @@ namespace StudentsAPI.Services.Student.Commands
                     .Where(x => request.UniversityIds.Contains(x.Id))
                     .ToList();
 
-                student.UniversityStudents = universitiesToAdd
-                    .Select(universityId => new UniversityStudents()
-                        { UniversityId = universityId.Id, Student = student })
+                student.Universities = universitiesToAdd
+                    .Select(universityName => new Database.Entities.University()
+                        { UniversityName = universityName.UniversityName})
                     .ToList();
 
                 _context.Students.Update(student);
